@@ -1,166 +1,104 @@
-# Experiment 3: DML Commands
-## Name: Dinesh V
-## Reg.no:212224040076
-## AIM
-To study and implement DML (Data Manipulation Language) commands.
+# Experiment 1: Entity-Relationship (ER) Diagram
 
-## THEORY
+## 🎯 Objective:
+To understand and apply the concepts of ER modeling by creating an ER diagram for a real-world application.
 
-### 1. INSERT INTO
-Used to add records into a relation.
-These are three type of INSERT INTO queries which are as
-A)Inserting a single record
-*Syntax (Single Row):*
-```
-INSERT INTO table_name (field_1, field_2, ...) VALUES (value_1, value_2, ...);
-```
-*Syntax (Multiple Rows):*
-```
-INSERT INTO table_name (field_1, field_2, ...) VALUES
-(value_1, value_2, ...),
-(value_3, value_4, ...);
-```
-*Syntax (Insert from another table):*
-```
-INSERT INTO table_name SELECT * FROM other_table WHERE condition;
-```
-### 2. UPDATE
-Used to modify records in a relation.
-Syntax:
-```
-UPDATE table_name SET column1 = value1, column2 = value2 WHERE condition;
-```
-### 3. DELETE
-Used to delete records from a relation.
-*Syntax (All rows):*
-```
-DELETE FROM table_name;
-```
-*Syntax (Specific condition):*
-```
-DELETE FROM table_name WHERE condition;
-```
-### 4. SELECT
-Used to retrieve records from a table.
-*Syntax:*
-```
-SELECT column1, column2 FROM table_name WHERE condition;
-```
-### *Question 1*
+## 📚 Purpose:
+The purpose of this workshop is to gain hands-on experience in designing ER diagrams that visually represent the structure of a database including entities, relationships, attributes, and constraints.
 
-Write a SQL statement to update the product_name as 'Grapefruit' whose product_id is 4 in the products table.
-```
-update products
-set product_name='Grapefruit'
-where product_id=4;
-```
-### *Output:*
+---
 
-![image](https://github.com/user-attachments/assets/f7cb35b7-e15c-4d6d-be26-695316a2752f)
+## 🧪 Choose One Scenario:
 
-### *Question 2*
+### 🔹 Scenario 1: University Database
+Design a database to manage students, instructors, programs, courses, and student enrollments. Include prerequisites for courses.
 
-Write a SQL query to reduce the reorder level by 30% where cost price is more than 50 and quantity in stock is less than 100 in the products table.
-```
-update Products
-set reorder_lvl=reorder_lvl*0.7
-where cost_price>50 and quantity<100;
-```
-### *Output:*
+*User Requirements:*
+- Academic programs grouped under departments.
+- Students have admission number, name, DOB, contact info.
+- Instructors with staff number, contact info, etc.
+- Courses have number, name, credits.
+- Track course enrollments by students and enrollment date.
+- Add support for prerequisites (some courses require others).
 
-![image](https://github.com/user-attachments/assets/be6557eb-cca2-408a-ba08-390d6e796285)
+---
 
-### *Question 3*
+### 🔹 Scenario 2: Hospital Database
+Design a database for patient management, appointments, medical records, and billing.
 
-Write a SQL query to Delete a Specific Surgery which was made on 28th Feb 2024.
-```
-delete from Surgeries 
-where surgery_date='2024-02-28';
-```
-### *Output:*
+*User Requirements:*
+- Patient details including contact and insurance.
+- Doctors and their departments, contact info, specialization.
+- Appointments with reason, time, patient-doctor link.
+- Medical records with treatments, diagnosis, test results.
+- Billing and payment details for each appointment.
 
-![image](https://github.com/user-attachments/assets/10904988-223a-42e7-94ca-3b48b01b9c31)
+---
 
-### *Question 4*
+## 📝 Tasks:
+1. Identify entities, relationships, and attributes.
+2. Draw the ER diagram using any tool (draw.io, dbdiagram.io, hand-drawn and scanned).
+3. Include:
+   - Cardinality & participation constraints
+   - Prerequisites for University OR Billing for Hospital
+4. Explain:
+   - Why you chose the entities and relationships.
+   - How you modeled prerequisites or billing.
 
-Write a SQL query to Delete customers from 'customer' table where 'GRADE' is not equal to 3.
-```
-delete from customer
-where GRADE!=3;
-```
-### *Output:*
+# ER Diagram Submission - Student Name
+# Name: Dinesh V
+# Reg.no:212224040076
+# Scenario Chosen:
+University 
+## ER Diagram:
+![image](https://github.com/user-attachments/assets/9177c06b-a61a-4691-afaa-ecdd1e051a16)
 
-![image](https://github.com/user-attachments/assets/79285c8a-2978-407d-82ba-b3c2cdb69272)
+## Entities and Attributes:
 
-### *Question 5*
+# Students:
+Attributes: StudentID, FirstName, LastName, DateOfBirth, Email, PhoneNumber, EnrollmentDate, DepartmentID.
+# Faculty:
+Attributes: FacultyID, FirstName, LastName, Email, PhoneNumber, HireDate, DepartmentID.
+# Department:
+Attributes: DepartmentID, DepartmentName, Location.
+# Course:
+Attributes: CourseID, CourseName, CourseCode, Credits, DepartmentID.
+# Enrollment:
+Attributes: EnrollmentID, StudentID, CourseID, EnrollmentDate, Grade.
+# Class:
+Attributes: ClassID, CourseID, FacultyID, Semester, Year, Schedule.
+# Advising:
+Attributes: AdvisingID, StudentID, FacultyID, AdvisingDate.
 
-Write a query to fetch details of employees whose EmpLname ends with an alphabet ‘A’ and contains five alphabets.
-```
-select * from EmployeeInfo 
-where EmpLname like '%A' and length(EmpLname)=5;
-```
-### *Output:*
+## Relationships and Constraints:
 
-![image](https://github.com/user-attachments/assets/821d1823-0fea-438e-9709-d82220eea49a)
+## Student–Advising–Faculty:
+Relationship: Advises Cardinality: Many-to-Many (each student can have multiple advisors, each faculty can advise multiple students) Participation: Total on Advising
+## Student–Enrollment–Course:
+Relationship: Enrolled in Cardinality: Many-to-Many Participation: Total on Enrollment
+## Course–Class–Faculty:
+Relationship: Teaches Cardinality: Many-to-Many (each course can be taught in multiple classes, each faculty can teach multiple classes)
+## Course–Department:
+Relationship: Offered by Cardinality: Many-to-One (Each course belongs to one department)
+## Student–Department:
+Relationship: Belongs to Cardinality: Many-to-One
+## Faculty–Department:
+Relationship: Belongs to Cardinality: Many-to-One
+## Class–Course:
+Relationship: Includes Cardinality: Many-to-One
+## Enrollment–Class:
+Relationship: Taught by Not standard; assumes indirect mapping via faculty
 
-### *Question 6*
+## Extension (Prerequisite / Billing):
+## Prerequisite Modeling:
+Could be modeled with a recursive relationship on Course: Relationship: Requires Cardinality: Many-to-Many (a course can have many prerequisites and be a prerequisite for many others)
 
-Write a SQL query to classify base in the Calculations table as 'Provided' if it is not NULL, otherwise 'Not Provided'.
-```
-select id,base,
-case when base is not NULL then 'Provided'
-else 'Not Provided'
-end as base_status
-from Calculations;
-```
-### *Output:*
+## Design Choices:
+Use of separate entities for Advising, Enrollment, and Class helps normalize many-to-many relationships and maintain relational integrity. Department as a central entity provides a logical way to group students, faculty, and courses.
 
-![image](https://github.com/user-attachments/assets/01350e6d-b955-4d9f-8d27-c40f32b3423e)
+Class entity includes scheduling details, separating course content from the time/location of delivery.
 
-### *Question 7*
-
-Write a SQL query to calculate the final price after applying both the discount and the tax. Return product_id, original_price, discount_percentage, tax_rate, and final_price.
-```
-select product_id,original_price,discount_percentage,tax_rate,(original_price*(1-discount_percentage))*(1+tax_rate) as final_price
-from products;
-```
-### *Output:*
-
-![image](https://github.com/user-attachments/assets/1fb06574-24fd-4972-b6e2-79a5a2065676)
-
-### *Question 8*
-
-Create a report that shows the capitalized FirstName and capitalized LastName renamed as FirstName and Lastname respectively and EmployeeId from the employees table sorted by EmployeeId in descending order.
-```
-select upper(FirstName) AS FirstName,upper(LastName) AS LastName,EmployeeId
-from employees
-order by EmployeeID desc;
-```
-### *Output:*
-
-![image](https://github.com/user-attachments/assets/fdff8b34-9326-409f-9a0f-184c53772e6c)
-
-### *Question 9*
-
-Write a SQL statement to retrieve city(column name) of all customers from customers table without any repeats.
-```
-select distinct city from customers;
-```
-### *Output:*
-
-![image](https://github.com/user-attachments/assets/38dc88ff-bf42-4f73-a8ca-5a1b75ae5a23)
-
-### *Question 10*
-
-Write a SQL statement to Double the salary for employees in department 20 who have a job_id ending with 'MAN'
-```
-update EMPLOYEES
-SET SALARY= SALARY *2
-WHERE JOB_ID like'%MAN';
-```
-### *Output:*
-
-![image](https://github.com/user-attachments/assets/30c35d8d-ef7b-4012-8554-9d1fe551bc5b)
+The design is modular and supports easy extension for future requirements like prerequisites, billing, or attendance.
 
 ## RESULT
-Thus, the SQL queries to implement DML commands have been executed successfully.
+Thus, the Entity-Relationship (ER) Diagram have been created successfully.
